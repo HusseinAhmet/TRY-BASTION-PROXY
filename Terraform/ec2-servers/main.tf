@@ -1,5 +1,5 @@
 resource "aws_instance" "server1" {
-  image_id               = var.AmiID
+  ami               = var.AmiID
   instance_type          = var.InstanceType
   vpc_security_group_ids = [aws_security_group.ec2SecurityGrp.id]
   key_name               = var.keyPair
@@ -12,7 +12,7 @@ resource "aws_instance" "server1" {
   }
 }
 resource "aws_instance" "server2" {
-  image_id               = var.AmiID
+  ami               = var.AmiID
   instance_type          = var.InstanceType
   vpc_security_group_ids = [aws_security_group.ec2SecurityGrp.id]
   key_name               = var.keyPair
