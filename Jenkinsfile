@@ -3,7 +3,7 @@ pipeline {
 tools {
   terraform 'terraform'
 }
-    if (${ENV}== "dev"){
+    
 stages {
 
         stage('Create Infrastructure') {
@@ -64,26 +64,26 @@ stages {
         }
 
     }
-}
-else{
-stages {
 
-        stage('Destroy Infrastructure') {
-            steps {
+// else{
+// stages {
+
+//         stage('Destroy Infrastructure') {
+//             steps {
        
-                  sh """
-                      cd Terraform/ 
-                      terraform destroy -var-file varValues.tfvars -auto-approve
-                      """
+//                   sh """
+//                       cd Terraform/ 
+//                       terraform destroy -var-file varValues.tfvars -auto-approve
+//                       """
                 
 
-            }
+//             }
 
-        }
+//         }
        
 
-    }
-}
+//     }
+// }
 
 }
 
