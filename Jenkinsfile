@@ -18,8 +18,7 @@ stages {
                     echo "[nodes:vars] ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_user=ubuntu ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_port=22">> "${WORKSPACE}"/inventory.txt 
-                    export jumpbox-pubIP = $(terraform output jumpbox-pubIP)
-                    echo 'ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@"${jumpbox-pubIP}" "'   '>>  "${WORKSPACE}"/inventory.txt
+                    echo 'ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@$(terraform output -raw jumpbox-pubIP)"'   '>>  "${WORKSPACE}"/inventory.txt
                 '''
                 
 
