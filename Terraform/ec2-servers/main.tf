@@ -1,5 +1,4 @@
 resource "aws_instance" "server1" {
-  name                   = "LanuchConfig- "
   image_id               = var.AmiID
   instance_type          = var.InstanceType
   vpc_security_group_ids = [aws_security_group.ec2SecurityGrp.id]
@@ -13,7 +12,6 @@ resource "aws_instance" "server1" {
   }
 }
 resource "aws_instance" "server2" {
-  name                   = "LanuchConfig- "
   image_id               = var.AmiID
   instance_type          = var.InstanceType
   vpc_security_group_ids = [aws_security_group.ec2SecurityGrp.id]
