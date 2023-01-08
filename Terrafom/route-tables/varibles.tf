@@ -18,16 +18,3 @@ variable "IgwId" {
       type = string
 
 }
-variable "Nat1ID" {
-    type = string
-
-}
-variable "Nat2ID" {
-    type = string
-}
-variable "privSub1Id" {
-    type = string
-}
-variable "privSub2Id" {
-    type = string
-}

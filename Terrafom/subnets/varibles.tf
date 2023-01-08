@@ -7,12 +7,6 @@ variable "PubSub1" {
 variable "PubSub2" {
   type = string
 }
-variable "PrivSub1" {
-   type = string
-}
-variable "PrivSub2" {
-   type = string
-}
 
 variable "vpc_id" {
   type= string
