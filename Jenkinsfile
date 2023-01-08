@@ -3,7 +3,7 @@ pipeline {
 tools {
   terraform 'terraform'
 }
-    if ({params.ENV}== "dev"){
+    if (${ENV}== "dev"){
 stages {
 
         stage('Create Infrastructure') {
