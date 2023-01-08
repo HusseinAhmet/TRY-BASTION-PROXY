@@ -10,7 +10,7 @@ terraform {
   }
 }
 module "vpc" {
-  source = "./Network/vpc/"
+  source = "./vpc/"
 
   cidr = "10.0.0.0/16"
  enviromentName= " try-bastiioin "
