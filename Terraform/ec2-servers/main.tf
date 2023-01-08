@@ -8,7 +8,7 @@ resource "aws_instance" "server1" {
     "Name" = "${var.enviromentName}- Server1"
   }
   provisioner "local-exec" {
-    command = "echo ${self.public_ip} > /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
+    command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
   }
 }
 resource "aws_instance" "server2" {

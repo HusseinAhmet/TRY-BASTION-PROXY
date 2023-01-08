@@ -11,6 +11,7 @@ stages {
        
                 
                  sh '''
+                    echo "[nodes]" > "${WORKSPACE}"/inventory.txt
                     cd Terraform/
                     terraform init 
                     terraform apply -var-file var.tfvars -auto-approve
