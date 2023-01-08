@@ -13,7 +13,7 @@ stages {
                  sh '''
                     cd Terraform/
                     terraform init 
-                    terraform apply -var-file varValues.tfvars -auto-approve
+                    terraform apply -var-file var.tfvars -auto-approve
                     echo "[nodes:vars] ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_user=ubuntu ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_port=22">> "${WORKSPACE}"/inventory.txt 
@@ -30,7 +30,7 @@ stages {
                       slackSend color: 'bad', message: 'Create Infrastructure failure '
                     sh """
                       cd Terraform/ 
-                      terraform destroy -var-file varValues.tfvars -auto-approve
+                      terraform destroy -var-file var.tfvars -auto-approve
                       """
                 }
                 
@@ -55,7 +55,7 @@ stages {
                       slackSend color: 'bad', message: 'Deploy failure '
                       sh """
                       cd Terraform/ 
-                      terraform destroy -var-file varValues.tfvars -auto-approve
+                      terraform destroy -var-file var.tfvars -auto-approve
                       """
                       
                 }
@@ -73,7 +73,7 @@ stages {
        
 //                   sh """
 //                       cd Terraform/ 
-//                       terraform destroy -var-file varValues.tfvars -auto-approve
+//                       terraform destroy -var-file var.tfvars -auto-approve
 //                       """
                 
 
