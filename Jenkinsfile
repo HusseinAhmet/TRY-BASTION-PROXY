@@ -18,7 +18,8 @@ stages {
                     echo "[nodes:vars] ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_user=ubuntu ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_port=22">> "${WORKSPACE}"/inventory.txt 
-                    echo 'ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@$(terraform output -raw jumpbox-pubIP)"'   '>>  "${WORKSPACE}"/inventory.txt
+                    echo "private_key_file=/home/ubuntu/train-key.pem">> "${WORKSPACE}"/inventory.txt 
+                    echo 'ansible_ssh_common_args='-o StrictHostKeyChecking=no -o "ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@$(terraform output -raw jumpbox-pubIP)"'   '>>  "${WORKSPACE}"/inventory.txt
                 '''
                 
 
@@ -54,10 +55,10 @@ stages {
                 }
                 failure {
                       slackSend color: 'bad', message: 'Deploy failure '
-                      sh """
-                      cd Terraform/ 
-                      terraform destroy -var-file var.tfvars -auto-approve
-                      """
+                    //   sh """
+                    //   cd Terraform/ 
+                    //   terraform destroy -var-file var.tfvars -auto-approve
+                    //   """
                       
                 }
                 
@@ -66,7 +67,7 @@ stages {
 
     }
 
-// else{
+
 // stages {
 
 //         stage('Destroy Infrastructure') {
@@ -84,7 +85,6 @@ stages {
        
 
 //     }
-// }
 
 }
 
