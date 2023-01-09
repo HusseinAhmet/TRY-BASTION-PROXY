@@ -19,7 +19,7 @@ stages {
                     echo "ansible_user=ubuntu ">> "${WORKSPACE}"/inventory.txt 
                     echo "ansible_port=22">> "${WORKSPACE}"/inventory.txt 
                     echo "private_key_file=/home/ubuntu/train-key.pem">> "${WORKSPACE}"/inventory.txt 
-                    echo 'ansible_ssh_common_args='-o StrictHostKeyChecking=no -o "ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@$(terraform output -raw jumpbox-pubIP)"'   '>>  "${WORKSPACE}"/inventory.txt
+                    echo 'ansible_ssh_common_args=\'-o StrictHostKeyChecking=no -o \"ssh -p 22 -i /home/ubuntu/train-key.pem -J ubuntu@$(terraform output -raw jumpbox-pubIP)\"\'   '>>  "${WORKSPACE}"/inventory.txt
                 '''
                 
 

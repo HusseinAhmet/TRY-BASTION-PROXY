@@ -9,7 +9,7 @@ resource "aws_instance" "bastionServer" {
     Name = "${var.enviromentName} - Jumpbox"
   }
      provisioner "local-exec" {
-   command = "echo ${self.public_ip} >> inventory.txt"
+   command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
  }
  provisioner "file" {
     source      = "/home/ubuntu/train-key.pem"

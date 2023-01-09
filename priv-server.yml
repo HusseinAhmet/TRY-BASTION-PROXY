@@ -1,5 +1,5 @@
 - name: slave
-  hosts: nodes
+  hosts: all
   remote_user: ubuntu
   become: yes
   tasks:
