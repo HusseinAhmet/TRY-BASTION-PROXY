@@ -15,8 +15,8 @@ stages {
                     terraform init 
                     terraform apply -var-file var.tfvars -auto-approve
                     ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='....b ' line='    b $(terraform output -raw jumpbox-pubIP)' "
-                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='....s1 ' line='    s1 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values= try-bastiioin - Server1" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "                
-                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='....s2 ' line='    s2 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values= try-bastiioin - Server2" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "
+                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='....s1 ' line='    s1 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values=' try-bastiioin - Server1'" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "                
+                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='....s2 ' line='    s2 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values=' try-bastiioin - Server2'" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "
                     '''
             }
          post {             
