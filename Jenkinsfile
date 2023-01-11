@@ -17,6 +17,7 @@ stages {
                     ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='^.*b1 ' line='  HostName $(terraform output -raw jumpbox-pubIP)' "
                     ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='^.*s1 ' line='  HostName $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values=' try-bastiioin - Server1'" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "                
                     ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='^.*s2 ' line='  HostName $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values=' try-bastiioin - Server2'" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "
+                    cp "${WORKSPACE}"/ssh-config /home/ubuntu/.ssh/config
                     '''
             }
          post {             
