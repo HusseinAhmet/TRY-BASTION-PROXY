@@ -1,0 +1,19 @@
+Host jumpbox
+    b 11
+    StrictHostKeyChecking no
+    Port 22
+    User ubuntu
+    IdentityFile /home/ubuntu/train-key.pem
+Host server1              
+    s1 22
+    StrictHostKeyChecking no
+    Port 22
+    User ubuntu
+    IdentityFile /home/ubuntu/train-key.pem
+    ProxyJump jumpbox
+Host server2
+    s2 33
+    StrictHostKeyChecking no
+    Port 22
+    User ubuntu
+    IdentityFile /home/ubuntu/train-key.pem

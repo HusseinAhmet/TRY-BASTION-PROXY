@@ -11,17 +11,12 @@ stages {
        
                 
                  sh '''
-                    echo "[nodes]" > "${WORKSPACE}"/inventory.txt
                     cd Terraform/
                     terraform init 
                     terraform apply -var-file var.tfvars -auto-approve
-                    echo "[nodes:vars] ">> "${WORKSPACE}"/inventory.txt 
-                    echo "ansible_user=ubuntu ">> "${WORKSPACE}"/inventory.txt 
-                    echo "ansible_port=22">> "${WORKSPACE}"/inventory.txt 
-                    echo "private_key_file=/home/ubuntu/train-key.pem">> "${WORKSPACE}"/inventory.txt 
-                    echo 'ansible_ssh_common_args=' -o StrictHostKeyChecking=no -o ProxyCommand="ssh -o \'ForwardAgent yes\' ubuntu@$(terraform output -raw jumpbox-pubIP) -p 22 \'nc %h %p\'"' '>>  "${WORKSPACE}"/inventory.txt                '''
-                
-
+                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='..b ' line='    b $(terraform output -raw jumpbox-pubIP)' "
+                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='..s1 ' line='    s1 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values= try-bastiioin - Server1" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "                
+                    ansible localhost -m lineinfile -a "path="${WORKSPACE}"/ssh-config  regexp='..s2 ' line='    s2 $(aws ec2 describe-instances --region eu-west-3 --filters "Name=tag:Name,Values= try-bastiioin - Server2" --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)' "
             }
          post {             
                  success {

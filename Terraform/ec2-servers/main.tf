@@ -7,9 +7,9 @@ resource "aws_instance" "server1" {
   tags = {
     "Name" = "${var.enviromentName}- Server1"
   }
-  provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
-  }
+  # provisioner "local-exec" {
+  #   command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
+  # }
 }
 resource "aws_instance" "server2" {
   ami               = var.AmiID
@@ -20,9 +20,9 @@ resource "aws_instance" "server2" {
   tags = {
     "Name" = "${var.enviromentName}- Server2"
   }
-  provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
-  }
+  # provisioner "local-exec" {
+  #   command = "echo ${self.public_ip} >> /home/ubuntu/jenkins_home/workspace/TRY-BASTION-PROXY/inventory.txt"
+  # }
 }
 resource "aws_security_group" "ec2SecurityGrp" {
 
